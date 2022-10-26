@@ -1,6 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+// Add serilog
+
+app.MapControllers();
 
 app.Run();
