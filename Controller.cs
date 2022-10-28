@@ -67,6 +67,8 @@ public class AppController : ControllerBase
         try
         {
             var url = await this._imageService.GetOrCreateLinkAsync(imageId);
+
+            return this.Ok(url);
         }
         catch (Exception ex)
         {

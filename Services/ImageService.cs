@@ -53,7 +53,7 @@ public class ImageService : IImageService
 
         if (image is null)
         {
-            throw new Exception($"Cannot find image with Id {id}.");
+            throw new Exception($"Cannot find image with Id {imageId}.");
         }
 
         if (image.Link is not null)
@@ -61,6 +61,17 @@ public class ImageService : IImageService
             return image.Link.Url;
         }
 
-        return "";
+        var url = $"https://test.com/images?id={Guid.NewGuid()}";
+
+        var link = new Link
+        {
+            Url = url,
+        };
+
+        image.Link = link;
+
+        await this._context.SaveChangesAsync();
+
+        return url;
     }
 }
