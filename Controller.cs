@@ -60,4 +60,17 @@ public class AppController : ControllerBase
             return this.BadRequest(ex.Message);
         }
     }
+
+    [HttpPost("link")]
+    public async Task<ActionResult> GetOrCreateLinkAsync(Guid imageId)
+    {
+        try
+        {
+            var url = await this._imageService.GetOrCreateLinkAsync(imageId);
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
 }
