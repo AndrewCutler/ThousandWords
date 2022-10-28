@@ -47,12 +47,13 @@ public class AppController : ControllerBase
     }
 
     [HttpPut("active")]
-    public async Task<ActionResult> SetImageActivityAsync(bool active)
+    public async Task<ActionResult> SetImageActivityAsync([FromBody] PutImageActiveDTO request)
     {
         try
         {
-            return this.Ok();
+            await this._imageService.SetImageActiveAsync(request.ImageId, request.Active);
 
+            return this.Ok();
         }
         catch (Exception ex)
         {

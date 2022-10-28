@@ -28,4 +28,18 @@ public class ImageService : IImageService
 
         await this._context.SaveChangesAsync();
     }
+
+    public async Task SetImageActiveAsync(Guid id, bool active)
+    {
+        var image = await this._context.Images.FirstOrDefaultAsync(image => image.Id == id);
+
+        if (image is null)
+        {
+            throw new Exception($"Cannot find image with Id {id}.");
+        }
+
+        image.Active = active;
+
+        await this._context.SaveChangesAsync();
+    }
 }
