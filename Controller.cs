@@ -11,9 +11,6 @@ public class AppController : ControllerBase
         this._imageService = imageService;
     }
 
-    [HttpGet]
-    public string Get() => "Hello world";
-
     [HttpGet("image")]
     public async Task<ActionResult> GetImageByIdAsync(Guid id)
     {
@@ -42,6 +39,20 @@ public class AppController : ControllerBase
             await this._imageService.SaveImageAsync(request.ImageData, request.UserId);
 
             return this.Ok();
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("active")]
+    public async Task<ActionResult> SetImageActivityAsync(bool active)
+    {
+        try
+        {
+            return this.Ok();
+
         }
         catch (Exception ex)
         {
