@@ -23,7 +23,7 @@ public class ImageService : IImageService
         {
             ImageData = imageData,
             UserId = userId,
-            UploadDate = DateTime.UtcNow,
+            Created = DateTime.UtcNow,
         });
 
         await this._context.SaveChangesAsync();

@@ -4,7 +4,7 @@ public class GetImageDTO
     public string ImageData { get; init; } = string.Empty;
     public Guid UserId { get; init; }
     public bool Active { get; init; } = true;
-    public string? Link { get; init; }
+    public string? Url { get; init; }
     public DateTime UploadDate { get; init; }
 
     public GetImageDTO(Image sourceEntity)
@@ -13,7 +13,7 @@ public class GetImageDTO
         this.ImageData = sourceEntity.ImageData;
         this.UserId = sourceEntity.UserId;
         this.Active = sourceEntity.Active;
-        this.Link = sourceEntity.Link;
-        this.UploadDate = sourceEntity.UploadDate;
+        this.Url = sourceEntity.Link?.Url;
+        this.UploadDate = sourceEntity.Created;
     }
 }

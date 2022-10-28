@@ -4,6 +4,6 @@ public class Image
     public string ImageData { get; init; } = string.Empty;
     public Guid UserId { get; init; }
     public bool Active { get; set; } = true;
-    public string? Link { get; init; }
-    public DateTime UploadDate { get; init; }
+    public Link? Link { get; init; }
+    public DateTime Created { get; init; }
 }
