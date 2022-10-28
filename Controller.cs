@@ -23,6 +23,15 @@ public class AppController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> SaveImageAsync([FromBody] ImagePostDTO request)
     {
-        return this.Ok();
+        try
+        {
+            await this._imageService.SaveImageAsync(request.ImageData, request.UserId);
+
+            return this.Ok();
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
     }
 }

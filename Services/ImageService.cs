@@ -14,8 +14,6 @@ public class ImageService : IImageService
         {
             ImageData = imageData,
             UserId = userId,
-            Active = true,
-            Link = null,
             UploadDate = DateTime.UtcNow,
         });
 
