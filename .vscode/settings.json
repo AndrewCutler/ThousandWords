@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish-release",
+  "appService.deploySubpath": "bin/Release/net6.0/publish",
+  "appService.defaultWebAppToDeploy": "/subscriptions/bed9adf3-d3ad-4de3-8c24-66ac40f5593b/appservices/subscriptions/bed9adf3-d3ad-4de3-8c24-66ac40f5593b/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/thousand-words"
+}
