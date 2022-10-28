@@ -17,7 +17,21 @@ public class AppController : ControllerBase
     [HttpGet("image")]
     public async Task<ActionResult> GetImageByIdAsync(Guid id)
     {
-        return this.Ok("image.png");
+        try
+        {
+            var image = await this._imageService.GetImageByIdAsync(id);
+
+            if (image is not null)
+            {
+                return this.Ok(new GetImageDTO(image));
+            }
+
+            return this.NotFound();
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
     }
 
     [HttpPost]
