@@ -47,6 +47,8 @@ public class ImageService : IImageService
 
     public async Task<string> GetOrCreateLinkAsync(Guid imageId)
     {
+        // TODO: replace with real domain
+        var urlBase = "https://test.com/image?id=";
         var image = await this._context.Images
             .Include(image => image.Link)
             .FirstOrDefaultAsync(image => image.Id == imageId);
@@ -58,20 +60,32 @@ public class ImageService : IImageService
 
         if (image.Link is not null)
         {
-            return image.Link.Url;
+            return $"{urlBase}{image.Link.Id.ToString()}";
         }
-
-        var url = $"https://test.com/images?id={Guid.NewGuid()}";
 
         var link = new Link
         {
-            Url = url,
+            Created = DateTime.UtcNow,
         };
 
         image.Link = link;
 
         await this._context.SaveChangesAsync();
 
-        return url;
+        return $"{urlBase}{link.Id.ToString()}";
+    }
+
+    public async Task<string> GetImageFromLinkAsync(Guid linkId)
+    {
+        var image = await this._context.Images
+            .Include(image => image.Link)
+            .FirstOrDefaultAsync(image => image.Link.Id == linkId);
+
+        if (image is null)
+        {
+            throw new Exception($"Cannot find image with Link Id {linkId}.");
+        }
+
+        return image?.ImageData!;
     }
 }

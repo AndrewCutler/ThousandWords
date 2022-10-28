@@ -12,7 +12,7 @@ public class AppController : ControllerBase
     }
 
     [HttpGet("image")]
-    public async Task<ActionResult> GetImageByIdAsync(Guid id)
+    public async Task<ActionResult<GetImageDTO>> GetImageByIdAsync(Guid id)
     {
         try
         {
@@ -62,13 +62,28 @@ public class AppController : ControllerBase
     }
 
     [HttpPost("link")]
-    public async Task<ActionResult> GetOrCreateLinkAsync(Guid imageId)
+    public async Task<ActionResult<string>> GetOrCreateLinkAsync(Guid imageId)
     {
         try
         {
             var url = await this._imageService.GetOrCreateLinkAsync(imageId);
 
             return this.Ok(url);
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("link")]
+    public async Task<ActionResult> GetImageByLinkAsync(Guid linkId)
+    {
+        try
+        {
+            var image = await this._imageService.GetImageFromLinkAsync(linkId);
+
+            return this.Ok(image);
         }
         catch (Exception ex)
         {

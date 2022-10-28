@@ -13,7 +13,8 @@ public class GetImageDTO
         this.ImageData = sourceEntity.ImageData;
         this.UserId = sourceEntity.UserId;
         this.Active = sourceEntity.Active;
-        this.Url = sourceEntity.Link?.Url;
+        // TODO: replace with real domain
+        this.Url = sourceEntity.Link is not null ? $"https://test.com/image?id={sourceEntity.Link.Id}" : null;
         this.UploadDate = sourceEntity.Created;
     }
 }

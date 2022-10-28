@@ -4,4 +4,5 @@ public interface IImageService
     Task SaveImageAsync(string imageData, Guid userId);
     Task SetImageActiveAsync(Guid id, bool active);
     Task<string> GetOrCreateLinkAsync(Guid imageId);
+    Task<string> GetImageFromLinkAsync(Guid linkId);
 }
