@@ -61,6 +61,21 @@ public class ImageController : ControllerBase
         }
     }
 
+    [HttpPut("move")]
+    public async Task<ActionResult> ChangeImageAlbumAsync(Guid imageId, Guid oldAlbumId, Guid newAlbumId)
+    {
+        try
+        {
+            await this._imageService.ChangeImageAlbumAsync(imageId, oldAlbumId, newAlbumId);
+
+            return this.Ok();
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
+
     [HttpPost("link")]
     public async Task<ActionResult<string>> GetOrCreateLinkAsync(Guid imageId)
     {

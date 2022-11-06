@@ -45,6 +45,40 @@ public class ImageService : IImageService
         await this._context.SaveChangesAsync();
     }
 
+    public async Task ChangeImageAlbumAsync(Guid imageId, Guid oldAlbumId, Guid? newAlbumId)
+    {
+        var image = await this._context.Images.FirstOrDefaultAsync(image => image.Id == imageId);
+
+        if (image is null)
+        {
+            throw new Exception($"Cannot find image with Id {imageId}.");
+        }
+
+        var oldAlbum = await this._context.Albums.FirstOrDefaultAsync(album => album.Id == oldAlbumId);
+
+        if (oldAlbum is null)
+        {
+            throw new Exception($"Cannot find original album with Id {oldAlbumId}.");
+        }
+
+        oldAlbum.Images.Remove(image);
+
+        // If newAlbumId is null, image is being removed from all albums
+        if (newAlbumId is not null)
+        {
+            var newAlbum = await this._context.Albums.FirstOrDefaultAsync(album => album.Id == newAlbumId);
+
+            if (newAlbum is null)
+            {
+                throw new Exception($"Cannot find original album with Id {newAlbumId}.");
+            }
+
+            newAlbum.Images.Add(image);
+        }
+
+        await this._context.SaveChangesAsync();
+    }
+
     public async Task<string> GetOrCreateLinkAsync(Guid imageId)
     {
         // TODO: replace with real domain
