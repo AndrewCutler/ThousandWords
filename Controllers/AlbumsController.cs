@@ -46,6 +46,21 @@ public class AlbumController : ControllerBase
         }
     }
 
+    [HttpPut]
+    public async Task<ActionResult> RenameAlbumAsync(Guid albumId, string name)
+    {
+        try
+        {
+            await this._albumService.RenameAlbumAsync(albumId, name);
+
+            return this.Ok();
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
+
     [HttpDelete]
     public async Task<ActionResult> DeleteAlbumAsync(Guid albumId)
     {

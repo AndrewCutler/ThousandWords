@@ -12,8 +12,8 @@ public class AlbumService : IAlbumService
     public async Task<List<Album>> GetUserAlbumsAsync(Guid userId)
     {
         var albums = await this._context.Albums
-        .Where(album => album.UserId == userId)
-        .ToListAsync();
+            .Where(album => album.UserId == userId)
+            .ToListAsync();
 
         return albums;
     }
@@ -29,13 +29,27 @@ public class AlbumService : IAlbumService
         await this._context.SaveChangesAsync();
     }
 
+    public async Task RenameAlbumAsync(Guid albumId, string name)
+    {
+        var album = await this._context.Albums.FirstOrDefaultAsync(album => album.Id == albumId);
+
+        if (album is null)
+        {
+            throw new Exception($"Cannot find album with ID {albumId}.");
+        }
+
+        album.Name = name;
+
+        await this._context.SaveChangesAsync();
+    }
+
     public async Task DeleteAlbumAsync(Guid albumId)
     {
         var album = await this._context.Albums.FirstOrDefaultAsync(album => album.Id == albumId);
 
         if (album is null)
         {
-            throw new Exception($"No album found with ID {albumId}.");
+            throw new Exception($"Cannot find album with ID {albumId}.");
         }
 
         this._context.Albums.Remove(album);
