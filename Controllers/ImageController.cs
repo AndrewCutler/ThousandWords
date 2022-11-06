@@ -12,7 +12,7 @@ public class ImageController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<GetImageDTO>> GetImageByIdAsync(Guid id)
+    public async Task<ActionResult<ImageDTO>> GetImageByIdAsync(Guid id)
     {
         try
         {
@@ -20,7 +20,7 @@ public class ImageController : ControllerBase
 
             if (image is not null)
             {
-                return this.Ok(new GetImageDTO(image));
+                return this.Ok(new ImageDTO(image));
             }
 
             return this.NotFound();

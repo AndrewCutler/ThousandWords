@@ -1,4 +1,4 @@
-public class GetImageDTO
+public class ImageDTO
 {
     public Guid Id { get; init; }
     public string ImageData { get; init; } = string.Empty;
@@ -7,7 +7,7 @@ public class GetImageDTO
     public string? Url { get; init; }
     public DateTime UploadDate { get; init; }
 
-    public GetImageDTO(Image sourceEntity)
+    public ImageDTO(Image sourceEntity)
     {
         this.Id = sourceEntity.Id;
         this.ImageData = sourceEntity.ImageData;

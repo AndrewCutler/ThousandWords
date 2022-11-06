@@ -21,7 +21,7 @@ public class ImageService : IImageService
 
     public async Task SaveImageAsync(string imageData, Guid userId)
     {
-        this._context.Add(new Image
+        this._context.Images.Add(new Image
         {
             ImageData = imageData,
             UserId = userId,
