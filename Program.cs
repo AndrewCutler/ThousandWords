@@ -11,6 +11,7 @@ var configBuilder = new ConfigurationBuilder()
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddOptions();
