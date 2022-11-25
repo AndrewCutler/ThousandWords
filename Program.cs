@@ -24,7 +24,6 @@ builder.Services.AddSingleton<IConfiguration>(configBuilder);
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo
-    // .MSSqlServer(new )
     .MSSqlServer(
         connectionString: connection,
         sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
